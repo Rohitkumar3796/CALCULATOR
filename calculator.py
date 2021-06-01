@@ -1,5 +1,10 @@
 from tkinter import *
 root=Tk()
+
+expression = ""
+# 'StringVar()' :It is used to get the input from user of input field
+input_text = StringVar()
+
 # THIS FUNCTION FOR PRESS THE NUMBER
 def press_number(item):
     global expression
@@ -10,20 +15,24 @@ def press_number(item):
 def bt_clear():
     global expression
     expression = ""
-    input_text.set("")
+    input_text.set("0")
 
 # THIS FUNCTION FOR TOTAL
 def bt_equal():
     global expression
-    result = str(eval(expression))  # 'eval':This function is used to evaluates the string expression directly
+    result = (eval(expression))  # 'eval':This function is used to evaluates the string expression directly
     input_text.set(result)
     expression = ""
 
 
-expression = ""
+#
+def cancel():
+    global expression
+    expression=expression[:-1]
+    input_text.set(expression)
 
-# 'StringVar()' :It is used to get the input from user of input field
-input_text = StringVar()
+
+
 
 # ENTRY BOX
 E1=Entry(root,borderwidth=10,font=("arial",8,'bold'),  textvariable=input_text,justify=RIGHT)
@@ -50,8 +59,10 @@ DIVISION=Button(root,text="/",height=2, width=5,command= lambda :press_number("/
 MINUS=Button(root,text="-",height=2, width=5, command=lambda :press_number("-")).grid(row=6,column=1)
 EQUAL=Button(root,text="=",height=2, width=5,command=lambda:bt_equal()).grid(row=6,column=2)
 
-DOT=Button(root,text=".",height=2, width=5,command=lambda:press_number(".")).grid(row=6,column=1)
-CLEAR=Button(root,text="CLEAR",height=2,width=19,command=lambda:bt_clear()).grid(row=7, column=0, columnspan=3, padx=1, pady=1)
+DOT=Button(root,text=".",height=2, width=5,command=lambda:press_number(".")).grid(row=7,column=0)
+CLEAR=Button(root,text="CLEAR",height=2,width=5,command=lambda:bt_clear()).grid(row=7, column=1, columnspan=1)
+BACK=Button(root,text="BACK",height=2,width=5,command=lambda:cancel()).grid(row=7, column=2, columnspan=1)
+
 # ________________________________________________________________________________________________________________
 # _______________________BUTTONS END___________________________________________________________________________________
 
